@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensori</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+    
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Scopri i dati dei <br> sensori</h1>
+            <a class="bottone" href="#content">vai ai dati</a>
+            <button type="submit" id="startbtn">start</button>
+        </div>
+    </section>
+<div>
+    <div class="card card-container" id="content">
+    </div>
+    <div class="card card-container" id="content2">
+    </div>
+    <div class="card-chart container">
+        <canvas id="myChart" height="300" width="800"></canvas>
+        
+    </div>
+</div>
+    <script src="sensor.js"></script>
+    <script src="app.js"></script>
+    <script src="chart.js"></script>
+</body>
+
+</html>

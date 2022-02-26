@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+  <link rel="shortcut icon" href="#">
+  <title>Sensori</title>
+  <style>
+    .button{
+      background-color: #f1f1fc;
+      color: rgb(1, 17, 17);
+      border-radius: 5px;
+      margin: 4px 2px;
+    }
+
+    .title {
+      text-align: center;   
+      color: rgb(15, 15, 15);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="columns coll-oneline bg-secondary">
+    <div class="column col-8">
+      <h1 class="title">Sensori</h1>
+      <div class="uk-align-center" style="text-align: center;">
+        <button class='button' id="btnTimer">Inizio</button>
+        <button class='button' id="btnAggiorna">Aggiorna</button>
+        <button class='button' id="btnModifica">Modifica</button>
+        <button class='button' id="btnElimina">Elimina</button>
+        <button class='button' id="btnMostraCronologia">Mostra cronologia</button>
+        <button class='button' id="btnMostraDati">Mostra dati</button>
+      </div>
+      <canvas id="chart"></canvas>
+    </div>
+
+    <div class="column col-4">
+      <pre class="box" style="height: 40em;" id="json-container"></pre>
+    </div>
+  </div>
+  <script src="chart.js"></script>
+  <script src="script.js"></script>
+  <script src="sensori.js"></script>
+  <script src="aggiorna.js"></script>
+</body>
+
+</html>

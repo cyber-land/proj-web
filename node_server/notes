@@ -1,0 +1,18 @@
+npm init
+npm install uuid
+npm install express
+npm run dev
+
+aggiungere dev alla lista scripts nel file package.json
+node index.js
+
+http://127.0.0.1:3000/
+http://127.0.0.1:3000/prodotti
+http://127.0.0.1:3000/prodotti/franco
+
+node create_db.js
+node index2.js
+
+netstat -tlpn
+fuser 3001/tcp
+fuser -k 3001/tcp
