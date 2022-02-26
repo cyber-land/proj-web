@@ -26,15 +26,17 @@ const createCategory = (req,res) => {
 }
 
 const deleteCategory = (req,res) => {
-  db.all("DELETE FROM categoria WHERE id="+req.params.categoryId, (err,rows) => {
-    if (err) {
-      res.json({
-        status: "SQL error"
-      })
-    } else {
-      res.json(rows)
-    }
-  })
+  try {
+    const {categoryId} = req.params
+    const stmt = db.prepare("DELETE FROM categoria WHERE id = ?");
+    stmt.run(categoryId) //esecuzione della query passando i parametri
+    stmt.finalize() //chiude la transazione, salva i dati
+    res.json({
+      idCategoria: categoryId
+    })
+  } catch (err) {
+    res.json(err)
+  }
 }
 
 //app.get('/', funs.statusAlive)
