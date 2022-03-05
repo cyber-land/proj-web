@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 import { CategoryCtx } from "../context"
 
-const CreaCategoriaForm = () => {
+const CreateCategory = () => {
   const [categoria, setCategoria] = useState("")
   const { AggiornaCategorie } = useContext(CategoryCtx)
 
@@ -24,18 +24,18 @@ const CreaCategoriaForm = () => {
     <>
       <form className="uk-grid-small" uk-grid="true">
         <div className="uk-width-1-2@s">
-          <input type="text" className="uk-input" placeholder="nome categoria"
+          <input type="text" className="uk-input" placeholder="Insert category name"
             value={categoria} onChange={e => setCategoria(e.target.value)} />
         </div>
-        <div className="uk-width-1-4@s">
+        <div className="uk-width-1-2@s">
           <button className="uk-button uk-button-default" onClick={e => {
             e.preventDefault()
             creaCategoria()
-          }}>crea</button>
+          }}>create</button>
         </div>
       </form>
     </>
   )
 }
 
-export default CreaCategoriaForm
+export default CreateCategory

@@ -25,6 +25,18 @@ const getCategory = (req, res) => {
   })
 }
 
+const getIdFromName = (req, res) => {
+  db.all(`SELECT * FROM category WHERE name="${req.params.name}"`,(err, rows) => {
+    if (err) {
+      res.json({
+        status: "SQL error"
+      })
+    } else {
+      res.json(rows)
+    }
+  })
+}
+
 const createCategory = (req,res) => {
   const stmt = db.prepare("INSERT INTO category (name) VALUES (?)");
   const name = req.body.name
@@ -58,4 +70,4 @@ const deleteCategory = (req,res) => {
   }
 }
 
-module.exports = {getCategories, getCategory, createCategory, deleteCategories, deleteCategory};
+module.exports = {getCategories, getCategory, getIdFromName, createCategory, deleteCategories, deleteCategory};
