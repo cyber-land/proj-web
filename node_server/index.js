@@ -2,56 +2,29 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 app.use(express.json()) //usa il middleware per fare il parsing del json nelle richieste ricevute
-app.use(express.static('public')) //serve images, CSS files, and JavaScript files in a directory named public
+//app.use(express.static('public')) //serve images, CSS files, and JavaScript files in a directory named public
 app.use(cors())
-
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./prova.db');
 
 const PORT = 3000
 
-const funs = require('./functions.js');
+const cfuns = require('./functions_for_category.js');
+const afuns = require('./functions_for_activity.js');
 
-const createCategory = (req,res) => {
-  const stmt = db.prepare("INSERT INTO categoria (nome) VALUES (?)");
-  const nome = req.body.nome
-  stmt.run(nome)
-  stmt.finalize()
-  db.all("SELECT last_insert_rowid() AS rowid", (err,rows) => {
-    res.json({
-      id: rows[0].rowid,
-      location: `/categories/${rows[0].rowid}`
-    })
-  })
-}
+const statusAlive = () => {
+  res.json({server: 'alive'});
+};
 
-const deleteCategory = (req,res) => {
-  try {
-    const {categoryId} = req.params
-    const stmt = db.prepare("DELETE FROM categoria WHERE id = ?");
-    stmt.run(categoryId) //esecuzione della query passando i parametri
-    stmt.finalize() //chiude la transazione, salva i dati
-    res.json({
-      idCategoria: categoryId
-    })
-  } catch (err) {
-    res.json(err)
-  }
-}
-
-const deleteCategories = (req,res) => {
-  db.run("DELETE FROM categoria")
-  db.run("UPDATE SQLITE_SEQUENCE SET SEQ= '0' WHERE NAME='categoria'")
-  res.json({deleted: 'true'})
-}
-
-//app.get('/', funs.statusAlive)
-app.get('/activities', funs.getActivities)
-app.get('/categories', funs.getCategories)
-app.get('/categories/:categoryId', funs.getCategory)
-app.post('/categories', createCategory) //POST localhost:3000/categorie {"nome": "michele"}
-app.delete('/categories/', deleteCategories)
-app.delete('/categories/:categoryId', deleteCategory)
+app.get('/', statusAlive) //sostituito da public
+app.get('/activities', afuns.getActivities)
+app.get('/activities/:activityId', afuns.getActivity)
+app.post('/activities', afuns.createActivity) //POST localhost:3000/categorie {"name": "js", "category": "3"}
+app.delete('/activities/', afuns.deleteActivities)
+app.delete('/activities/:activityId', afuns.deleteActivity)
+app.get('/categories', cfuns.getCategories)
+app.get('/categories/:categoryId', cfuns.getCategory)
+app.post('/categories', cfuns.createCategory) //POST localhost:3000/categorie {"name": "history"}
+app.delete('/categories/', cfuns.deleteCategories)
+app.delete('/categories/:categoryId', cfuns.deleteCategory)
 
 app.listen(PORT, function(err){
   if (err) console.log(err)
