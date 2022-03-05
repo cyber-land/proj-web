@@ -1,9 +1,12 @@
-import React, {useState} from "react"
+import React, {useState, useContext} from "react"
+import {CategoryCtx} from "../context"
 
-const CreaCategoriaForm = ({setCategorie}) => {
+const CreaCategoriaForm = () => {
   const [categoria,setCategoria] = useState("")
+  const {AggiornaCategorie} = useContext(CategoryCtx)
 
   const creaCategoria=()=>{
+    console.log(`created new category with name "${categoria}"`)
     fetch("http://127.0.0.1:3000/categories", {
       method: "POST",
       headers:{
@@ -14,13 +17,7 @@ const CreaCategoriaForm = ({setCategorie}) => {
       })
     })
     .then(r => r.json())
-    .then(() => {
-      setCategorie(
-        vecchioStato => {
-          return [...vecchioStato,{nome:categoria}]
-        }
-      )
-    })
+    .then(result => {/*console.log(result);*/ AggiornaCategorie()})
   }
   
   return (

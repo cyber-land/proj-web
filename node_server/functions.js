@@ -14,7 +14,7 @@ const getActivities = (req, res) => {
 
 const getCategories = (req,res) => {
   //console.log(req)
-  db.all("SELECT nome FROM categoria",(err, rows) => {
+  db.all("SELECT * FROM categoria",(err, rows) => {
     if (err) {
       res.json({
         status: "SQL error"

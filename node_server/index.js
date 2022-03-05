@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 app.use(express.json()) //usa il middleware per fare il parsing del json nelle richieste ricevute
-//app.use(express.static('public')) //serve images, CSS files, and JavaScript files in a directory named public
+app.use(express.static('public')) //serve images, CSS files, and JavaScript files in a directory named public
 app.use(cors())
 
 const sqlite3 = require('sqlite3').verbose();
@@ -20,7 +20,7 @@ const createCategory = (req,res) => {
   db.all("SELECT last_insert_rowid() AS rowid", (err,rows) => {
     res.json({
       id: rows[0].rowid,
-      location: `/categorie/${rows[0].rowid}`
+      location: `/categories/${rows[0].rowid}`
     })
   })
 }
@@ -39,11 +39,18 @@ const deleteCategory = (req,res) => {
   }
 }
 
+const deleteCategories = (req,res) => {
+  db.run("DELETE FROM categoria")
+  db.run("UPDATE SQLITE_SEQUENCE SET SEQ= '0' WHERE NAME='categoria'")
+  res.json({deleted: 'true'})
+}
+
 //app.get('/', funs.statusAlive)
 app.get('/activities', funs.getActivities)
 app.get('/categories', funs.getCategories)
 app.get('/categories/:categoryId', funs.getCategory)
 app.post('/categories', createCategory) //POST localhost:3000/categorie {"nome": "michele"}
+app.delete('/categories/', deleteCategories)
 app.delete('/categories/:categoryId', deleteCategory)
 
 app.listen(PORT, function(err){

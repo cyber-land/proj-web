@@ -1,19 +1,31 @@
-import React, {useState, useEffect} from "react"
+import React, {useEffect, useContext} from "react"
+import {CategoryCtx} from "../context"
 
+const CancellaCategoria = (id) =>{
+  console.log(`deleted category with id "${id}"`)
+  return fetch(`http://127.0.0.1:3000/categories/${id}`, {
+    method: "DELETE",
+    headers:{
+      "Content-Type": "application/json"
+    }
+  })
+}
 
 const CategoriaElement = ({element}) => {
+  const {AggiornaCategorie} = useContext(CategoryCtx)
   return (
-    <div>{element.nome}</div>
+    <div>{element.nome} <button onClick={() =>{CancellaCategoria(element.id).then(() => AggiornaCategorie());
+       AggiornaCategorie()}}>x</button></div>
   )
 }
 
-const ElencoCategorie = ({categorie,setCategorie}) => {
-  
+const ElencoCategorie = () => {
+  const {categorie,AggiornaCategorie} = useContext(CategoryCtx)
 
   // viene eseguito al primo mount del componente
-  useEffect(()=>{fetch("http://127.0.0.1:3000/categories").then(r => r.json()).then(body =>setCategorie(body))}, [])
+  useEffect(()=>{AggiornaCategorie()}, [])
 
-  const AggiornaCategorie = () =>fetch("http://127.0.0.1:3000/categories").then(r => r.json()).then(body =>setCategorie(body))
+  //const AggiornaCategorie = () =>fetch("http://127.0.0.1:3000/categories").then(r => r.json()).then(body =>setCategorie(body))
   
   return (
     <>
