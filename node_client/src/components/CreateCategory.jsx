@@ -6,8 +6,7 @@ const CreateCategory = () => {
   const { AggiornaCategorie } = useContext(CategoryCtx)
 
   const creaCategoria = () => {
-    console.log(`created new category with name "${categoria}"`)
-    fetch("http://127.0.0.1:3000/categories", {
+    return fetch("http://127.0.0.1:3000/categories", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -16,8 +15,6 @@ const CreateCategory = () => {
         name: categoria
       })
     })
-      .then(r => r.json())
-      .then(result => {/*console.log(result);*/ AggiornaCategorie() })
   }
 
   return (
@@ -30,7 +27,8 @@ const CreateCategory = () => {
         <div className="uk-width-1-2@s">
           <button className="uk-button uk-button-default" onClick={e => {
             e.preventDefault()
-            creaCategoria()
+            creaCategoria().then(r => r.json())
+            .then(() => {console.log(`created new category "${categoria}"`); AggiornaCategorie() })
           }}>create</button>
         </div>
       </form>

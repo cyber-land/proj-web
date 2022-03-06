@@ -1,27 +1,23 @@
 import React, { useState, useContext } from "react"
 import { ActivityCtx } from "../context"
 
+const createActivity = (activity, categoryId) => {
+  return fetch("http://127.0.0.1:3000/activities", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name: activity,
+      categoryId: categoryId
+    })
+  })
+}
+
 const CreateActivity = () => {
   const [activity, setActivity] = useState("")
   const [categoryId, setCategoryId] = useState("")
   const { UpdateActivities } = useContext(ActivityCtx)
-
-  const createActivity = () => {
-    console.log(`created new activity with name "${activity}"`)
-    fetch("http://127.0.0.1:3000/activities", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: activity,
-        categoryId: categoryId
-      })
-    })
-      .then(r => r.json())
-      .then(UpdateActivities)
-  }
-
   return (
     <>
       <form className="uk-grid-small" uk-grid="true">
@@ -36,7 +32,8 @@ const CreateActivity = () => {
         <div className="uk-width-1-3@s">
           <button className="uk-button uk-button-default" onClick={e => {
             e.preventDefault()
-            createActivity()
+            createActivity(activity, categoryId).then(r => r.json())
+            .then(() => {console.log(`created new activity "${activity}"`); UpdateActivities()})
           }}>create</button>
         </div>
       </form>

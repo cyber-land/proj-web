@@ -16,24 +16,30 @@ function App() {
   return (
     <main>
       <h1 className="uk-text-center uk-text-bolder uk-text-uppercase">classifier</h1>
-      <CategoryCtx.Provider value={{
+      <div className="uk-child-width-expand@s uk-text-center" uk-grid="true">
+        <div className="uk-card uk-card-default uk-card-body">
+        <CategoryCtx.Provider value={{
         categorie,
         setCategorie,
         AggiornaCategorie
       }}>
         <CreateCategory />
-        <DeleteCategories />
         <GetCategories /*categorie={categorie} setCategorie={setCategorie}*/ />
+        <DeleteCategories />
       </CategoryCtx.Provider>
-      <ActivityCtx.Provider value={{
+        </div>
+        <div className="uk-card uk-card-default uk-card-body">
+        <ActivityCtx.Provider value={{
         activities,
         setActivities,
         UpdateActivities
       }}>
         <CreateActivity />
         {/*<DeleteActivities />*/}
-        <GetActivities/>
+        <GetActivities />
       </ActivityCtx.Provider>
+        </div>
+      </div>
     </main>
   );
 }

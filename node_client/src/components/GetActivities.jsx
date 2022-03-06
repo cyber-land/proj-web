@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState } from "react"
 import { ActivityCtx } from "../context"
 
 const DeleteActivity = (id) => {
-  console.log(`deleted activity with id "${id}"`)
   return fetch(`http://127.0.0.1:3000/activities/${id}`, { method: "DELETE" })
 }
 
@@ -26,7 +25,8 @@ const ActivityElement = ({ element }, {category}) => {
       <td>{`${categoryName} (${element.category_id})`}</td>
       <td>
         <button className="uk-button uk-button-default"
-          onClick={() => { DeleteActivity(element.id).then(() => UpdateActivities()); UpdateActivities() }}>
+          onClick={() => { DeleteActivity(element.id).then(r => r.json())
+          .then(() => {UpdateActivities(); console.log(`deleted activity with id "${element.id}"`)})}}>
           X
         </button>
       </td>
@@ -38,8 +38,9 @@ const GetActivities = () => {
   const { activities, UpdateActivities } = useContext(ActivityCtx)
   useEffect(() => { UpdateActivities() }, [])
   return (
-    <div className="uk-text-center">
+    <div>
       <h2>LIST ACTIVITIES</h2>
+      <button className="uk-button uk-button-default" onClick={UpdateActivities}>Reload</button>
       <table className="uk-table uk-table-striped uk-table-middle uk-table-justify">
         <thead className="uk-text-bolder uk-text-uppercase">
           <tr>

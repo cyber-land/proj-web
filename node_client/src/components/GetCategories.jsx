@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from "react"
 import { CategoryCtx } from "../context"
 
 const CancellaCategoria = (id) => {
-  console.log(`deleted category with id "${id}"`)
   return fetch(`http://127.0.0.1:3000/categories/${id}`, { method: "DELETE" })
 }
 
@@ -14,7 +13,8 @@ const CategoriaElement = ({ element }) => {
       <td>{element.id}</td>
       <td>
         <button className="uk-button uk-button-default"
-          onClick={() => { CancellaCategoria(element.id).then(() => AggiornaCategorie()); AggiornaCategorie() }}>
+          onClick={() => { CancellaCategoria(element.id).then(r => r.json())
+          .then(() => {AggiornaCategorie(); console.log(`deleted category with id "${element.id}"`)})}}>
           X
         </button>
       </td>
@@ -28,9 +28,9 @@ const ElencoCategorie = () => {
   useEffect(() => { AggiornaCategorie() }, []) //eseguito al primo mount del componente
   
   return (
-    <div className="uk-text-center">
+    <div>
       <h2>LIST CATEGORIES</h2>
-      {/*<button className="uk-button uk-button-default" onClick={AggiornaCategorie}>Reload</button>*/}
+      <button className="uk-button uk-button-default" onClick={AggiornaCategorie}>Reload</button>
       <table className="uk-table uk-table-striped uk-table-middle uk-table-justify">
         <thead className="uk-text-bolder uk-text-uppercase">
           <tr>

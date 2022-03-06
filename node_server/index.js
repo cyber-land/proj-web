@@ -21,7 +21,7 @@ app.post('/activities', afuns.createActivity) //POST localhost:3000/categorie {"
 app.delete('/activities/', afuns.deleteActivities)
 app.delete('/activities/:activityId', afuns.deleteActivity)
 app.get('/categories', cfuns.getCategories)
-app.get('/categories_name/:name', cfuns.getIdFromName)
+app.get('/categories?name=:name', cfuns.getIdFromName)
 app.get('/categories/:categoryId', cfuns.getCategory)
 app.post('/categories', cfuns.createCategory) //POST localhost:3000/categorie {"name": "history"}
 app.delete('/categories/', cfuns.deleteCategories)
