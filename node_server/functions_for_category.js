@@ -70,4 +70,12 @@ const deleteCategory = (req,res) => {
   }
 }
 
-module.exports = {getCategories, getCategory, getIdFromName, createCategory, deleteCategories, deleteCategory};
+const updateCategory = (req, res) => {
+  const stmt = db.prepare(`UPDATE category SET name = (?) WHERE id = ${req.params.categoryId}`);
+  stmt.run(req.body.name)
+  stmt.finalize()
+  res.json({request: 'PUT'})
+}
+
+module.exports = {getCategories, getCategory, getIdFromName, createCategory, 
+  deleteCategories, deleteCategory, updateCategory};
