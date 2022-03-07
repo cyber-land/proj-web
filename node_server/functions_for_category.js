@@ -4,9 +4,7 @@ const db = new sqlite3.Database('./prova.db');
 const getCategories = (req,res) => {
   db.all("SELECT * FROM category",(err, rows) => {
     if (err) {
-      res.json({
-        status: "SQL error"
-      })
+      res.json([])
     } else {
       res.json(rows)
     }

@@ -17,14 +17,15 @@ const statusAlive = () => {
 app.get('/', statusAlive) //sostituito da public
 app.get('/activities', afuns.getActivities)
 app.get('/activities/:activityId', afuns.getActivity)
-app.post('/activities', afuns.createActivity) //POST localhost:3000/categories {"name": "js", "category": "3"}
+app.post('/activities', afuns.createActivity) //POST {"name": "js", "category": "3"}
+app.put('/activities/:activityId', afuns.updateActivity)  //PUT {"italy": "1"}
 app.delete('/activities/', afuns.deleteActivities)
 app.delete('/activities/:activityId', afuns.deleteActivity)
 app.get('/categories', cfuns.getCategories)
 app.get('/categories?name=:name', cfuns.getIdFromName)
 app.get('/categories/:categoryId', cfuns.getCategory)
-app.post('/categories', cfuns.createCategory) //POST localhost:3000/categories {"name": "history"}
-app.put('/categories/:categoryId', cfuns.updateCategory)  //PUT localhost:3000/categories {"name": "math"}
+app.post('/categories', cfuns.createCategory) //POST {"name": "history"}
+app.put('/categories/:categoryId', cfuns.updateCategory)  //PUT {"name": "math"}
 app.delete('/categories/', cfuns.deleteCategories)
 app.delete('/categories/:categoryId', cfuns.deleteCategory)
 

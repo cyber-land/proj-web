@@ -4,6 +4,7 @@ import CreateCategory from "./components/CreateCategory"
 import DeleteCategories from "./components/DeleteCategories"
 import GetActivities from "./components/GetActivities"
 import CreateActivity from "./components/CreateActivity"
+import DeleteActivities from "./components/DeleteActivities"
 import { CategoryCtx, ActivityCtx } from "./context"
 
 function App() {
@@ -35,8 +36,8 @@ function App() {
         UpdateActivities
       }}>
         <CreateActivity />
-        {/*<DeleteActivities />*/}
         <GetActivities />
+        <DeleteActivities />
       </ActivityCtx.Provider>
         </div>
       </div>

@@ -3,7 +3,8 @@
 const fs = require('fs')
 const sqlite3 = require('sqlite3').verbose();
 
-fs.unlinkSync("./prova.db") //elimina un eventuale precedente istanza
+//elimina un eventuale precedente istanza
+try {fs.unlinkSync("./prova.db")} catch (err) {}
 
 const db = new sqlite3.Database('./prova.db');
 

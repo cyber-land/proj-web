@@ -3,7 +3,11 @@ const db = new sqlite3.Database('./prova.db');
 
 const getActivities = (req, res) => {
   db.all("SELECT * FROM activity",function(err, rows) {
-    res.json(rows)
+    if (err) {
+      res.json([])
+    } else {
+      res.json(rows)
+    }
   })
 };
 
@@ -20,15 +24,19 @@ const getActivity = (req, res) => {
 const createActivity = (req,res) => {
   const stmt = db.prepare("INSERT INTO activity (name, category_id) VALUES (?,?)");
   const name = req.body.name
-  const categoryId = req.body.categoryId
-  stmt.run(name, categoryId)
-  stmt.finalize()
-  db.all("SELECT last_insert_rowid() AS rowid", (err,rows) => {
-    res.json({
-      id: rows[0].rowid,
-      location: `/activites/${rows[0].rowid}`
+  const categoryId = parseInt(req.body.categoryId)
+  if (name && categoryId) {
+    stmt.run(name, categoryId)
+    stmt.finalize()
+    db.all("SELECT last_insert_rowid() AS rowid", (err,rows) => {
+      res.json({
+        id: rows[0].rowid,
+        location: `/activites/${rows[0].rowid}`
+      })
     })
-  })
+  } else {
+    res.json({status: 'error'})
+  }
 }
 
 const deleteActivities = (req,res) => {
@@ -49,4 +57,13 @@ const deleteActivity = (req,res) => {
   }
 }
 
-module.exports = {getActivities, getActivity, createActivity, deleteActivities, deleteActivity};
+const updateActivity = (req, res) => {
+  const stmt = db.prepare(`UPDATE activity SET name = "${req.body.name}", category_id = (?) \
+  WHERE id = ${req.params.activityId}`);
+  stmt.run(req.body.category_id)
+  stmt.finalize()
+  res.json({request: 'PUT'})
+}
+
+module.exports = {getActivities, getActivity, createActivity, 
+  deleteActivities, deleteActivity, updateActivity};

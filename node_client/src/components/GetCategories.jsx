@@ -32,9 +32,9 @@ const CategoriaElement = ({ element }) => {
           update
         </button>
         <div id="modal-close-default" uk-modal="true">
-  <div className="uk-modal-dialog uk-modal-body">*/}
+  <div className="uk-modal-dialog uk-modal-body">
             <button className="uk-modal-close-default" type="button" uk-close="true"></button>
-            <h2 className="uk-modal-title">Modify element</h2>
+            <h2 className="uk-modal-title">Modify element</h2>*/}
                 <form>
                 <input type="text" className="uk-input" placeholder="Insert category name"
                   value={newCategoryName} onChange={e => setnewCategoryName(e.target.value)} />
