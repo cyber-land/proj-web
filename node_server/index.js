@@ -10,7 +10,7 @@ const PORT = 3000
 const cfuns = require('./functions_for_category.js');
 const afuns = require('./functions_for_activity.js');
 
-const statusAlive = () => {
+const statusAlive = (req, res) => {
   res.json({server: 'alive'});
 };
 
