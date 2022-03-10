@@ -2,11 +2,11 @@ import React, { useEffect, useContext, useState } from "react"
 import { ActivityCtx } from "../context"
 
 const DeleteActivity = (id) => {
-  return fetch(`http://127.0.0.1:3000/activities/${id}`, { method: "DELETE" })
+  return fetch(`http://127.0.0.1:2500/activities/${id}`, { method: "DELETE" })
 }
 
 const GetCategoryName = (id, setCategoryName) => {
-  fetch(`http://127.0.0.1:3000/categories/${id}`, { method: "GET" }).then(r => r.json())
+  fetch(`http://127.0.0.1:2500/categories/${id}`, { method: "GET" }).then(r => r.json())
   .then(result => {
     try {setCategoryName(result[0].name)} catch (err) {
       setCategoryName('Error')

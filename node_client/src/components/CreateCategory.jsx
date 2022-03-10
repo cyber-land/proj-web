@@ -6,7 +6,7 @@ const CreateCategory = () => {
   const { AggiornaCategorie } = useContext(CategoryCtx)
 
   const creaCategoria = () => {
-    return fetch("http://127.0.0.1:3000/categories", {
+    return fetch("http://127.0.0.1:2500/categories", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

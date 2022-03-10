@@ -10,9 +10,9 @@ import { CategoryCtx, ActivityCtx } from "./context"
 function App() {
   const [categorie, setCategorie] = useState([])
   const [activities, setActivities] = useState([])
-  const AggiornaCategorie = () => fetch("http://127.0.0.1:3000/categories")
+  const AggiornaCategorie = () => fetch("http://127.0.0.1:2500/categories")
     .then(r => r.json()).then(body => setCategorie(body))
-  const UpdateActivities = () => fetch("http://127.0.0.1:3000/activities")
+  const UpdateActivities = () => fetch("http://127.0.0.1:2500/activities")
     .then(r => r.json()).then(body => setActivities(body))
   return (
     <main>

@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react"
 import { CategoryCtx } from "../context"
 
 const CancellaCategoria = (id) => {
-  return fetch(`http://127.0.0.1:3000/categories/${id}`, { method: "DELETE" })
+  return fetch(`http://127.0.0.1:2500/categories/${id}`, { method: "DELETE" })
 }
 
 const updateCategory = (id, newName) => {
   //TODO: controllare se il nome è valido
-  return fetch(`http://127.0.0.1:3000/categories/${id}`, {
+  return fetch(`http://127.0.0.1:2500/categories/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

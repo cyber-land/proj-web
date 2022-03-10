@@ -5,7 +5,7 @@ app.use(express.json()) //usa il middleware per fare il parsing del json nelle r
 //app.use(express.static('public')) //serve images, CSS files, and JavaScript files in a dir named public
 app.use(cors())
 
-const PORT = 3000
+const PORT = 2500
 
 const cfuns = require('./functions_for_category.js');
 const afuns = require('./functions_for_activity.js');

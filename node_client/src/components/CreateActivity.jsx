@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react"
 import { ActivityCtx } from "../context"
 
 const createActivity = (activity, categoryId) => {
-  return fetch("http://127.0.0.1:3000/activities", {
+  return fetch("http://127.0.0.1:2500/activities", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
