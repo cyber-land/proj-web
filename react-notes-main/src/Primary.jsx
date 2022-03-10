@@ -1,25 +1,12 @@
 import { useContext, useState } from "react";
 import NotesContext from "./context";
 import Create from './CreatePage'
+import Note from './Note'
 
 function Primary() {
   //recuperare il riferimento alla lista delle pagine del diario
   const { notes, setNotes, title, setTitle, 
     body, setBody, date, setDate, positionCurrentNote } = useContext(NotesContext)
-
-  class Note {
-    constructor(title, body, date) {
-      this.title = title
-      this.body = body
-      this.date = date
-    }
-    static makeAndCorrect(title, body, date) {
-      let d = date;
-      if (!date) { d = new Date(Date.now()).toISOString().substring(0, 10) }
-      //if (!title) t = d
-      return new Note(title,body,date)
-    }
-  }
 
   //inserisce la nota corrente al posto della nota da sostituire in {notes}
   //TODO: se la posizione non è valida?

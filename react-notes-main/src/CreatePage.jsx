@@ -1,23 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
 import NotesContext from './context'
+import Note from './Note'
 
 function Create() {
 
   const { notes, setNotes, title, body, date } = useContext(NotesContext)
-
-  class Note {
-    constructor(title, body, date) {
-      this.title = title
-      this.body = body
-      this.date = date
-    }
-    static makeAndCorrect(title, body, date) {
-      let d = date;
-      if (!date) { d = new Date(Date.now()).toISOString().substring(0, 10) }
-      //if (!title) t = d
-      return new Note(title, body, date)
-    }
-  }
 
   //inserisce la nota corrente in coda
   function addNewNote() {
