@@ -37,3 +37,5 @@ differenziare la creazione di un nuova nota (pulsante apposito) con la modifica 
 inserire la data automaticamente
 
 rimuovere il titolo delle pagine?
+
+rimuovere il pulsante modify, deve essere una funzione automatica, magari aggiungere il pulsante che abilita (/disabilita) la modifica, tenendo di default la modalità readonly
