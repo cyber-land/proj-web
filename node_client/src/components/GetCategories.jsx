@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react"
 import { CategoryCtx } from "../context"
+import server_addr from '../config'
 
 const CancellaCategoria = (id) => {
-  return fetch(`http://127.0.0.1:2500/categories/${id}`, { method: "DELETE" })
+  return fetch(`http://${server_addr}/categories/${id}`, { method: "DELETE" })
 }
 
 const updateCategory = (id, newName) => {
   //TODO: controllare se il nome è valido
-  return fetch(`http://127.0.0.1:2500/categories/${id}`, {
+  return fetch(`http://${server_addr}/categories/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -71,7 +72,7 @@ const ElencoCategorie = () => {
   return (
     <div>
       <h2>LIST CATEGORIES</h2>
-      <button className="uk-button uk-button-default" onClick={AggiornaCategorie}>Reload</button>
+      <button className="uk-button uk-button-default" >Reload</button>
       <table className="uk-table uk-table-striped uk-table-middle uk-table-justify">
         <thead className="uk-text-bolder uk-text-uppercase">
           <tr>

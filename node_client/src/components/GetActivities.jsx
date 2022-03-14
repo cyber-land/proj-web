@@ -1,12 +1,13 @@
 import React, { useEffect, useContext, useState } from "react"
 import { ActivityCtx } from "../context"
+import server_addr from '../config'
 
 const DeleteActivity = (id) => {
-  return fetch(`http://127.0.0.1:2500/activities/${id}`, { method: "DELETE" })
+  return fetch(`http://${server_addr}/activities/${id}`, { method: "DELETE" })
 }
 
 const GetCategoryName = (id, setCategoryName) => {
-  fetch(`http://127.0.0.1:2500/categories/${id}`, { method: "GET" }).then(r => r.json())
+  fetch(`http://${server_addr}/categories/${id}`, { method: "GET" }).then(r => r.json())
   .then(result => {
     try {setCategoryName(result[0].name)} catch (err) {
       setCategoryName('Error')
@@ -17,7 +18,7 @@ const GetCategoryName = (id, setCategoryName) => {
 const ActivityElement = ({ element }, {category}) => {
   const { UpdateActivities } = useContext(ActivityCtx)
   const [categoryName, setCategoryName] = useState(element.category_id)
-  GetCategoryName(element.category_id, setCategoryName)
+  //GetCategoryName(element.category_id, setCategoryName)
   return (
     <tr>
       <td>{element.name}</td>
@@ -40,7 +41,7 @@ const GetActivities = () => {
   return (
     <div>
       <h2>LIST ACTIVITIES</h2>
-      <button className="uk-button uk-button-default" onClick={UpdateActivities}>Reload</button>
+      <button className="uk-button uk-button-default" >Reload</button>
       <table className="uk-table uk-table-striped uk-table-middle uk-table-justify">
         <thead className="uk-text-bolder uk-text-uppercase">
           <tr>

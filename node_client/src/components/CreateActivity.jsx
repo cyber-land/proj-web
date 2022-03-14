@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react"
 import { ActivityCtx } from "../context"
+import server_addr from '../config'
 
 const createActivity = (activity, categoryId) => {
-  return fetch("http://127.0.0.1:2500/activities", {
+  return fetch(`http://${server_addr}/activities`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react"
 import { CategoryCtx } from "../context"
+import server_addr from '../config'
 
 const CreateCategory = () => {
   const [categoria, setCategoria] = useState("")
   const { AggiornaCategorie } = useContext(CategoryCtx)
 
   const creaCategoria = () => {
-    return fetch("http://127.0.0.1:2500/categories", {
+    return fetch(`http://${server_addr}/categories`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
