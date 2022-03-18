@@ -1,11 +1,11 @@
 import React, { useContext } from "react"
 import { CategoryCtx } from "../context"
 import server_addr from '../config'
-
+//eliminazione categoria
 const deleteCategories = () => {
   return fetch(`http://${server_addr}/categories`, { method: "DELETE" })
 }
-
+//eliminazione di tutte le categorie
 const DeleteEverything = () => {
   const { AggiornaCategorie } = useContext(CategoryCtx)
   return (
