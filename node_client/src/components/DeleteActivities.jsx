@@ -1,11 +1,11 @@
 import React, { useContext } from "react"
 import { ActivityCtx } from "../context"
 import server_addr from '../config'
-
+//eliminazione singola attività
 const deleteActivities = () => {
   return fetch(`http://${server_addr}/activities`, { method: "DELETE" })
 }
-
+//eliminazione di tutte le attività
 const DeleteEverything = () => {
   const { UpdateActivities } = useContext(ActivityCtx)
   return (
