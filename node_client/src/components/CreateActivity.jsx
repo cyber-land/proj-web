@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 import { ActivityCtx } from "../context"
 import server_addr from '../config'
-
+//creazione attività
 const createActivity = (activity, categoryId) => {
   return fetch(`http://${server_addr}/activities`, {
     method: "POST",
@@ -14,7 +14,7 @@ const createActivity = (activity, categoryId) => {
     })
   })
 }
-
+//form che l'utente visualizza
 const CreateActivity = () => {
   const [activity, setActivity] = useState("")
   const [categoryId, setCategoryId] = useState("")
@@ -35,7 +35,7 @@ const CreateActivity = () => {
             e.preventDefault()
             createActivity(activity, categoryId).then(r => r.json())
             .then(() => {console.log(`created new activity "${activity}"`); UpdateActivities()})
-          }}>create</button>
+          }}>create</button> 
         </div>
       </form>
     </>
