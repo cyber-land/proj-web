@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 import { CategoryCtx } from "../context"
 import server_addr from '../config'
-
+//crea categoria
 const CreateCategory = () => {
   const [categoria, setCategoria] = useState("")
   const { AggiornaCategorie } = useContext(CategoryCtx)
@@ -17,7 +17,7 @@ const CreateCategory = () => {
       })
     })
   }
-
+//form che visualizza l'utente
   return (
     <>
       <form className="uk-grid-small" uk-grid="true">
