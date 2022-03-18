@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./prova.db');
-
+//reperisce le attività dal db
 const getActivities = (req, res) => {
   db.all("SELECT * FROM activity",function(err, rows) {
     if (err) {
@@ -11,7 +11,7 @@ const getActivities = (req, res) => {
   })
 };
 
-
+//reperisce un'attività dal db
 const getActivity = (req, res) => {
   db.all("SELECT * FROM activity WHERE id="+req.params.activityId,(err, rows) => {
     if (err)
@@ -20,7 +20,7 @@ const getActivity = (req, res) => {
       res.json(rows)
   })
 }
-
+//crea un'attività
 const createActivity = (req,res) => {
   const stmt = db.prepare("INSERT INTO activity (name, category_id) VALUES (?,?)");
   const name = req.body.name
@@ -38,13 +38,13 @@ const createActivity = (req,res) => {
     res.json({status: 'error'})
   }
 }
-
+//elimina attività
 const deleteActivities = (req,res) => {
   db.run("DELETE FROM activity")
   db.run("UPDATE SQLITE_SEQUENCE SET SEQ= '0' WHERE NAME='activity'")
   res.json({deleted: 'true'})
 }
-
+//elimina attività singola
 const deleteActivity = (req,res) => {
   try {
     const {activityId} = req.params
@@ -56,13 +56,13 @@ const deleteActivity = (req,res) => {
     res.json(err)
   }
 }
-
+//update di un'attività
 const updateActivity = (req, res) => {
   const stmt = db.prepare(`UPDATE activity SET name = "${req.body.name}", category_id = (?) \
   WHERE id = ${req.params.activityId}`);
   stmt.run(req.body.category_id)
   stmt.finalize()
-  res.json({request: 'PUT'})
+  res.json({request: 'PUT'}) //richiesta di tipo put che permette di fare l'update
 }
 
 module.exports = {getActivities, getActivity, createActivity, 
