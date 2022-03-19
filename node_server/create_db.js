@@ -25,7 +25,7 @@ fs.readFile('./database.json', 'utf8', (err, data) => {
       const stmt = db.prepare("INSERT INTO category (name) VALUES (?)");
       categories.map(category => stmt.run(category));
       stmt.finalize()
-
+      //inserimento attività nel db
       categories.map((category, index) => {
         const s = db.prepare(`INSERT INTO activity (name, category_id) VALUES (?,${index + 1})`);
         activities[index].map(activity => s.run(activity))
